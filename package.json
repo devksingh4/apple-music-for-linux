@@ -1,12 +1,12 @@
 {
   "name": "apple-music-for-linux",
-  "author": "Marcus Tomlinson",
-  "version": "0.7.0",
+  "author": "Dev Singh",
+  "version": "0.8.0",
   "description": "Apple Music for Linux",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --linux snap"
+    "dist": "electron-builder --linux"
   },
   "build": {
     "electronDownload": {
@@ -15,7 +15,8 @@
     "appId": "apple-music-for-linux",
     "productName": "Apple Music",
     "linux": {
-      "target": "snap",
+      "target": ["snap", "deb", "rpm"],
+      "maintainer": "dev@devksingh.com",
       "icon": "apple-music-for-linux.png",
       "category": "Audio"
     },
@@ -33,11 +34,11 @@
         "x11"
       ],
       "desktop": {
-        "StartupWMClass": "apple-music-for-linux"
+        "StartupWMClass": "apple-music-linux"
       }
     }
   },
-  "repository": "https://github.com/cross-platform/apple-music-for-linux",
+  "repository": "https://github.com/devksingh4/apple-music-for-linux",
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "https://github.com/castlabs/electron-releases#v13.0.1-wvvmp",

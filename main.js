@@ -5,7 +5,6 @@ const appName = 'Apple Music'
 
 locale = app.getLocaleCountryCode();
 themeFile = null;
-nativeTheme.themeSource = 'dark';
 
 const appUrl = 'https://beta.music.apple.com/'
 
@@ -18,7 +17,9 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    title: appName
+    title: appName,
+    show: false,
+    icon: 'apple-music-for-linux.png'
   })
   mainWindow.loadURL(appUrl + locale.toLowerCase() + '/browse')
 
@@ -27,11 +28,11 @@ function createWindow() {
       mainWindow.reload();
     }
     else if (input.type === 'keyUp' && input.control && input.key.toLowerCase() === 'd') {
-      if (nativeTheme.themeSource === 'light') {
-        nativeTheme.themeSource = 'dark'
+      if (nativeTheme.themeSource === 'dark') {
+        nativeTheme.themeSource = 'light'
       }
       else {
-        nativeTheme.themeSource = 'light'
+        nativeTheme.themeSource = 'dark'
       }
       if (themeFile) {
         fs.writeFileSync(themeFile, nativeTheme.themeSource);
@@ -45,7 +46,9 @@ function createWindow() {
       shell.openExternal(url)
     }
   });
-
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show()
+  })
   mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options) => {
     event.preventDefault()
     shell.openExternal(url)

@@ -3,26 +3,11 @@ const fs = require('fs');
 
 const appName = 'Apple Music'
 
-if (process.env.SNAP_USER_COMMON) {
-  localeFile = process.env.SNAP_USER_COMMON + '/locale';
-  if (!fs.existsSync(localeFile)) {
-    fs.writeFileSync(localeFile, app.getLocaleCountryCode());
-  }
-  locale = fs.readFileSync(localeFile).toString().substring(0, 2).toUpperCase();
+locale = app.getLocaleCountryCode();
+themeFile = null;
+nativeTheme.themeSource = 'dark';
 
-  themeFile = process.env.SNAP_USER_COMMON + '/theme';
-  if (!fs.existsSync(themeFile)) {
-    fs.writeFileSync(themeFile, 'light');
-  }
-  nativeTheme.themeSource = fs.readFileSync(themeFile).toString().toLowerCase();
-}
-else {
-  locale = app.getLocaleCountryCode();
-  themeFile = null;
-  nativeTheme.themeSource = 'light';
-}
-
-const appUrl = 'https://music.apple.com/'
+const appUrl = 'https://beta.music.apple.com/'
 
 const customCss =
   '.web-navigation__native-upsell {display: none !important;}'
@@ -31,8 +16,8 @@ function createWindow() {
   Menu.setApplicationMenu(null)
 
   const mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1200,
+    height: 800,
     title: appName
   })
   mainWindow.loadURL(appUrl + locale.toLowerCase() + '/browse')
@@ -72,7 +57,7 @@ function createWindow() {
 
   mainWindow.webContents.on('page-title-updated', () => {
     mainWindow.webContents.insertCSS(customCss)
-    mainWindow.setTitle(appName);
+    mainWindow.setTitle(appName); 
   });
 
   mainWindow.on("close", () => {

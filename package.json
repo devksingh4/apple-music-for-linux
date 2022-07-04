@@ -1,7 +1,7 @@
 {
   "name": "apple-music-for-linux",
   "author": "Dev Singh",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Apple Music for Linux",
   "main": "main.js",
   "scripts": {
@@ -15,10 +15,10 @@
     "appId": "apple-music-for-linux",
     "productName": "Apple Music",
     "linux": {
-      "target": ["snap", "deb", "rpm"],
+      "target": ["deb", "rpm", "snap"],
       "maintainer": "dev@devksingh.com",
-      "icon": "apple-music-for-linux.png",
-      "category": "Audio"
+      "category": "Audio",
+      "icon": "./build/icons"
     },
     "snap": {
       "grade": "stable",
